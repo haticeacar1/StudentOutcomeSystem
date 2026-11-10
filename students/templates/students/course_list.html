@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Course Management</title>
+</head>
+<body>
+
+    <h1>Course Management</h1>
+
+    <h2>Course List</h2>
+
+    <a href="{% url 'course_create' %}">Add New Course</a>
+    |
+    <a href="{% url 'student_list' %}">Go to Students</a>
+
+    <br><br>
+
+    <table border="1" cellpadding="10">
+        <thead>
+            <tr>
+                <th>Course Code</th>
+                <th>Course Name</th>
+                <th>Semester</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {% for course in courses %}
+            <tr>
+                <td>{{ course.course_code }}</td>
+                <td>{{ course.course_name }}</td>
+                <td>{{ course.semester }}</td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="3">No courses found.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+</body>
+</html>
