@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import Student
+from .models import Student, Course
 
 def student_list(request):
     students = Student.objects.all()
@@ -7,7 +7,7 @@ def student_list(request):
         'students': students
     })
 from django.shortcuts import redirect
-from .forms import StudentForm
+from .forms import StudentForm, CourseForm
 
 def student_create(request):
     if request.method == 'POST':
@@ -51,3 +51,23 @@ def student_delete(request, pk):
         'student': student
     })
 
+
+def course_list(request):
+    courses = Course.objects.all()
+    return render(request, 'students/course_list.html', {
+        'courses': courses
+    })
+
+
+def course_create(request):
+    if request.method == 'POST':
+        form = CourseForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('course_list')
+    else:
+        form = CourseForm()
+
+    return render(request, 'students/course_form.html', {
+        'form': form
+    })
