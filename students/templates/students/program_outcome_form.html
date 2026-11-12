@@ -1,0 +1,14 @@
+
+<h1>Add Program Outcome</h1>
+
+<form method="POST">
+    {% csrf_token %}
+
+    {{ form.as_p }}
+
+    <button type="submit">Save Program Outcome</button>
+</form>
+
+<a href="{% url 'program_outcome_list' %}">
+    Back to Program Outcomes
+</a>

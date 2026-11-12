@@ -1,0 +1,19 @@
+
+<h1>Delete Enrollment</h1>
+
+<p>Are you sure you want to delete this enrollment?</p>
+
+<p>
+    Student:
+    {{ enrollment.student.first_name }}
+    {{ enrollment.student.last_name }}
+</p>
+
+<p>Course: {{ enrollment.course.course_code }}</p>
+
+<form method="POST">
+    {% csrf_token %}
+    <button type="submit">Yes, Delete</button>
+</form>
+
+<a href="{% url 'enrollment_list' %}">Cancel</a>

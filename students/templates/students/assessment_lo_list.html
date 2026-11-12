@@ -1,0 +1,46 @@
+<h1>Assessment - Learning Outcome Management</h1>
+
+<h2>Assessment - LO Relationships</h2>
+
+<a href="{% url 'assessment_lo_create' %}">
+    Add New Relationship
+</a>
+
+<table style="border-collapse: collapse; width: 100%;">
+    <thead>
+        <tr>
+            <th style="border: 1px solid black; padding: 8px;">Course</th>
+            <th style="border: 1px solid black; padding: 8px;">Assessment</th>
+            <th style="border: 1px solid black; padding: 8px;">Learning Outcome</th>
+            <th style="border: 1px solid black; padding: 8px;">Weight</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        {% for mapping in mappings %}
+        <tr>
+            <td style="border: 1px solid black; padding: 8px;">
+                {{ mapping.assessment.course.course_code }}
+            </td>
+            <td style="border: 1px solid black; padding: 8px;">
+                {{ mapping.assessment.name }}
+            </td>
+            <td style="border: 1px solid black; padding: 8px;">
+                {{ mapping.learning_outcome.code }}
+            </td>
+            <td style="border: 1px solid black; padding: 8px;">
+                {{ mapping.weight }}
+            </td>
+        </tr>
+
+        {% empty %}
+        <tr>
+            <td colspan="4" style="border: 1px solid black; padding: 8px;">
+                No relationships found.
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<a href="{% url 'student_list' %}">Go to Students</a>

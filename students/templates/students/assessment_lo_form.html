@@ -1,0 +1,13 @@
+<h1>Add Assessment - Learning Outcome Relationship</h1>
+
+<form method="POST">
+    {% csrf_token %}
+
+    {{ form.as_p }}
+
+    <button type="submit">Save Relationship</button>
+</form>
+
+<a href="{% url 'assessment_lo_list' %}">
+    Back to Assessment - LO Relationships
+</a>

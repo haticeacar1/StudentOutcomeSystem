@@ -1,0 +1,265 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Outcome System</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f3f5f9;
+            color: #243247;
+        }
+
+        header {
+            background: #17243a;
+            color: white;
+            padding: 24px 5%;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 26px;
+        }
+
+        header p {
+            color: #cbd5e1;
+            margin-bottom: 0;
+        }
+
+        main {
+            max-width: 1200px;
+            margin: 35px auto;
+            padding: 0 20px;
+        }
+
+        .welcome {
+            margin-bottom: 28px;
+        }
+
+        .welcome h2 {
+            font-size: 27px;
+            margin-bottom: 8px;
+        }
+
+        .welcome p {
+            color: #64748b;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 18px;
+            margin-bottom: 35px;
+        }
+
+        .stat-card, .module-card {
+            background: white;
+            padding: 22px;
+            border-radius: 12px;
+            box-shadow: 0 3px 12px rgba(0,0,0,0.05);
+        }
+
+        .stat-card h3 {
+            color: #64748b;
+            font-size: 14px;
+            margin-top: 0;
+        }
+
+        .stat-card .number {
+            font-size: 30px;
+            font-weight: bold;
+            color: #243b60;
+        }
+
+        .section-title {
+            margin-bottom: 18px;
+        }
+
+        .modules {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 18px;
+        }
+
+        .module-card h3 {
+            margin-top: 0;
+            color: #243b60;
+        }
+
+        .module-card p {
+            color: #64748b;
+            font-size: 14px;
+            min-height: 35px;
+        }
+
+        .module-card a {
+            display: inline-block;
+            background: #243b60;
+            color: white;
+            text-decoration: none;
+            padding: 10px 15px;
+            border-radius: 7px;
+            font-size: 14px;
+        }
+
+        .module-card a:hover {
+            background: #365782;
+        }
+
+        .coming-soon {
+            color: #a66b19;
+            font-size: 13px;
+            font-weight: bold;
+        }
+
+        footer {
+            text-align: center;
+            color: #64748b;
+            padding: 30px;
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <h1>Student Outcome System</h1>
+    <p>Academic Performance and Program Outcome Tracking</p>
+</header>
+
+<main>
+
+    <section class="welcome">
+        <h2>Dashboard</h2>
+        <p>
+            Welcome to the Student Outcome Management System.
+            Manage students, courses, assessments and learning outcomes
+            from one place.
+        </p>
+    </section>
+
+    <h2 class="section-title">System Overview</h2>
+
+    <section class="stats">
+
+        <div class="stat-card">
+            <h3>Total Students</h3>
+            <div class="number">{{ student_count }}</div>
+        </div>
+
+        <div class="stat-card">
+            <h3>Total Courses</h3>
+            <div class="number">{{ course_count }}</div>
+        </div>
+
+        <div class="stat-card">
+            <h3>Program Outcomes</h3>
+            <div class="number">{{ po_count }}</div>
+        </div>
+
+        <div class="stat-card">
+            <h3>Learning Outcomes</h3>
+            <div class="number">{{ lo_count }}</div>
+        </div>
+
+        <div class="stat-card">
+            <h3>Assessments</h3>
+            <div class="number">{{ assessment_count }}</div>
+        </div>
+
+        <div class="stat-card">
+            <h3>Enrollments</h3>
+            <div class="number">{{ enrollment_count }}</div>
+        </div>
+
+        <div class="stat-card">
+            <h3>Grades</h3>
+            <div class="number">{{ grade_count }}</div>
+        </div>
+
+    </section>
+
+    <h2 class="section-title">Management Modules</h2>
+
+    <section class="modules">
+
+        <div class="module-card">
+            <h3>Student Management</h3>
+            <p>Add, edit and manage student information.</p>
+            <a href="{% url 'student_list' %}">Open Students</a>
+        </div>
+
+        <div class="module-card">
+            <h3>Course Management</h3>
+            <p>View and manage academic courses.</p>
+            <a href="{% url 'course_list' %}">Open Courses</a>
+        </div>
+
+        <div class="module-card">
+            <h3>Program Outcomes</h3>
+            <p>Manage department program outcomes.</p>
+            <a href="{% url 'program_outcome_list' %}">Open POs</a>
+        </div>
+
+        <div class="module-card">
+            <h3>Learning Outcomes</h3>
+            <p>Manage course learning outcomes.</p>
+            <a href="{% url 'learning_outcome_list' %}">Open LOs</a>
+        </div>
+
+        <div class="module-card">
+            <h3>Assessments</h3>
+            <p>Manage exams and course assessments.</p>
+            <a href="{% url 'assessment_list' %}">Open Assessments</a>
+        </div>
+
+        <div class="module-card">
+            <h3>Enrollments</h3>
+            <p>Manage student course registrations.</p>
+            <a href="{% url 'enrollment_list' %}">Open Enrollments</a>
+        </div>
+
+        <div class="module-card">
+            <h3>Grade Management</h3>
+            <p>Enter and manage student grades.</p>
+            <a href="{% url 'grade_list' %}">Open Grades</a>
+        </div>
+
+        <div class="module-card">
+            <h3>Assessment–LO Mapping</h3>
+            <p>Connect course assessments with learning outcomes.</p>
+            <a href="{% url 'assessment_lo_list' %}">Open Mapping</a>
+        </div>
+
+        <div class="module-card">
+            <h3>LO–PO Mapping</h3>
+            <p>Connect learning outcomes with program outcomes.</p>
+            <a href="{% url 'lo_po_list' %}">Open LO–PO Mapping</a>
+        </div>
+
+        <div class="module-card">
+            <h3>Performance Results</h3>
+            <p>View calculated learning and program outcome scores.</p>
+            <<a href="{% url 'performance_results' %}">
+                 Open Performance Results
+            </a>
+        </div>
+
+    </section>
+
+</main>
+
+<footer>
+    Student Outcome System | Academic Project
+</footer>
+
+</body>
+</html>

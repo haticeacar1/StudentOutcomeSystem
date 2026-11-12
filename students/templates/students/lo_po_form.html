@@ -1,0 +1,14 @@
+
+<h1>Add Learning Outcome - Program Outcome Mapping</h1>
+
+<form method="POST">
+    {% csrf_token %}
+
+    {{ form.as_p }}
+
+    <button type="submit">Save Mapping</button>
+</form>
+
+<br>
+
+<a href="{% url 'lo_po_list' %}">Back to LO-PO Mappings</a>

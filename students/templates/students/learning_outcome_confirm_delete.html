@@ -1,0 +1,17 @@
+
+<h1>Delete Learning Outcome</h1>
+
+<p>
+    Are you sure you want to delete
+    {{ outcome.code }} - {{ outcome.description }}?
+</p>
+
+<form method="POST">
+    {% csrf_token %}
+
+    <button type="submit">Yes, Delete</button>
+</form>
+
+<a href="{% url 'learning_outcome_list' %}">
+    Cancel
+</a>

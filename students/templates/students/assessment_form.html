@@ -1,0 +1,11 @@
+<h1>Add Assessment</h1>
+
+<form method="POST">
+    {% csrf_token %}
+
+    {{ form.as_p }}
+
+    <button type="submit">Save Assessment</button>
+</form>
+
+<a href="{% url 'assessment_list' %}">Back to Assessments</a>

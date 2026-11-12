@@ -1,0 +1,11 @@
+
+<h1>Enrollment Form</h1>
+
+<form method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+
+    <button type="submit">Save Enrollment</button>
+</form>
+
+<a href="{% url 'enrollment_list' %}">Back to Enrollment List</a>

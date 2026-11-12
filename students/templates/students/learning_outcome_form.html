@@ -1,0 +1,11 @@
+<h1>Add Learning Outcome</h1>
+
+<form method="POST">
+    {% csrf_token %}
+
+    {{ form.as_p }}
+
+    <button type="submit">Save Learning Outcome</button>
+</form>
+
+<a href="{% url 'learning_outcome_list' %}">Back to Learning Outcomes</a>

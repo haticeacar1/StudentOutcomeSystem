@@ -24,7 +24,6 @@ class Course(models.Model):
         return f"{self.course_code} - {self.course_name}"
 
 
-# PROGRAM OUTCOME (PO)
 class ProgramOutcome(models.Model):
     code = models.PositiveSmallIntegerField(unique=True)
     description = models.TextField()
@@ -33,7 +32,6 @@ class ProgramOutcome(models.Model):
         return f"PO{self.code}"
 
 
-# LEARNING OUTCOME (LO)
 class LearningOutcome(models.Model):
     course = models.ForeignKey(
         Course,
@@ -55,7 +53,6 @@ class LearningOutcome(models.Model):
         return f"{self.course.course_code} - {self.code}"
 
 
-# LEARNING OUTCOME - PROGRAM OUTCOME RELATIONSHIP
 class LearningOutcomeProgramOutcome(models.Model):
     learning_outcome = models.ForeignKey(
         LearningOutcome,
@@ -78,7 +75,6 @@ class LearningOutcomeProgramOutcome(models.Model):
         ]
 
 
-# STUDENT COURSE ENROLLMENT
 class Enrollment(models.Model):
     student = models.ForeignKey(
         Student,
@@ -108,10 +104,16 @@ class Assessment(models.Model):
         on_delete=models.CASCADE
     )
     name = models.CharField(max_length=100)
+    weight = models.FloatField(
+        default=0.0,
+        validators=[
+            MinValueValidator(0),
+            MaxValueValidator(100)
+        ]
+    )
 
     def __str__(self):
         return f"{self.course.course_code} - {self.name}"
-
 
 # STUDENT GRADE
 class Grade(models.Model):
