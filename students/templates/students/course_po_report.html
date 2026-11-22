@@ -1,0 +1,183 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Course PO Achievement Report</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f3f5f9;
+            color: #243247;
+        }
+
+        header {
+            background: #17243a;
+            color: white;
+            padding: 24px 5%;
+        }
+
+        main {
+            max-width: 1100px;
+            margin: 35px auto;
+            padding: 0 20px;
+        }
+
+        .card {
+            background: white;
+            padding: 24px;
+            margin-bottom: 25px;
+            border-radius: 12px;
+            box-shadow: 0 3px 12px rgba(0,0,0,0.05);
+        }
+
+        h2 {
+            color: #243b60;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+
+        th, td {
+            padding: 13px;
+            text-align: left;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        th {
+            background: #243b60;
+            color: white;
+        }
+
+        select {
+            padding: 10px;
+            border: 1px solid #cbd5e1;
+            border-radius: 6px;
+            min-width: 220px;
+        }
+
+        button, .back-link {
+            display: inline-block;
+            background: #243b60;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 7px;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        button:hover, .back-link:hover {
+            background: #365782;
+        }
+
+        .score {
+            font-weight: bold;
+            color: #243b60;
+        }
+
+        .empty {
+            color: #a66b19;
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <h1>Student Outcome System</h1>
+    <p>Course-Based PO Achievement Report</p>
+</header>
+
+<main>
+
+    <div class="card">
+        <h2>Select Course</h2>
+
+        <form method="GET">
+            <select name="course" required>
+                <option value="">Choose a course</option>
+
+                {% for course in courses %}
+                    <option value="{{ course.id }}"
+                        {% if selected_course.id == course.id %}
+                            selected
+                        {% endif %}>
+                        {{ course }}
+                    </option>
+                {% endfor %}
+            </select>
+
+            <button type="submit">View Report</button>
+        </form>
+    </div>
+
+    {% if selected_course %}
+
+        <div class="card">
+            <h2>Program Outcome Achievement</h2>
+
+            <p>
+                <strong>Course:</strong>
+                {{ selected_course }}
+            </p>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Program Outcome</th>
+                        <th>Students with Scores</th>
+                        <th>Average Score</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    {% for result in po_results %}
+                        <tr>
+                            <td>{{ result.outcome }}</td>
+
+                            <td>
+                                {{ result.student_count }}
+                            </td>
+
+                            <td class="score">
+                                {% if result.average_score is not None %}
+                                    {{ result.average_score }} / 100
+                                {% else %}
+                                    <span class="empty">
+                                        No grades available
+                                    </span>
+                                {% endif %}
+                            </td>
+                        </tr>
+                    {% empty %}
+                        <tr>
+                            <td colspan="3">
+                                No Program Outcome mappings found.
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+    {% endif %}
+
+    <a class="back-link" href="{% url 'dashboard' %}">
+        Back to Dashboard
+    </a>
+
+</main>
+
+</body>
+</html>
