@@ -527,3 +527,53 @@ def performance_results(request):
         'students/performance_results.html',
         context
     )
+
+def course_po_report(request):
+    courses = Course.objects.all().order_by('id')
+    selected_course = None
+    po_results = []
+
+    course_id = request.GET.get('course')
+
+    if course_id:
+        selected_course = get_object_or_404(Course, pk=course_id)
+
+        enrollments = Enrollment.objects.filter(
+            course=selected_course
+        )
+
+        mappings = LearningOutcomeProgramOutcome.objects.filter(
+            learning_outcome__course=selected_course
+        ).select_related('program_outcome')
+
+        program_outcomes = {
+            mapping.program_outcome_id: mapping.program_outcome
+            for mapping in mappings
+        }
+
+        for po in program_outcomes.values():
+            scores = []
+
+            for enrollment in enrollments:
+                score = calculate_po_score(enrollment.id, po.id)
+
+                if score is not None:
+                    scores.append(score)
+
+            average_score = (
+                round(sum(scores) / len(scores), 2)
+                if scores else None
+            )
+
+            po_results.append({
+                'outcome': po,
+                'student_count': len(scores),
+                'average_score': average_score,
+            })
+
+    return render(request, 'students/course_po_report.html', {
+        'courses': courses,
+        'selected_course': selected_course,
+        'po_results': po_results,
+    })
+

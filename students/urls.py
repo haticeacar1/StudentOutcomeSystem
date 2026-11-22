@@ -11,6 +11,7 @@ urlpatterns = [
     path('courses/add/', views.course_create, name='course_create'),
     path('program-outcomes/', views.program_outcome_list, name='program_outcome_list'),
     path('program-outcomes/add/', views.program_outcome_create, name='program_outcome_create'),
+    path('course-po-report/', views.course_po_report, name='course_po_report'),
 
     path(
     'program-outcomes/<int:pk>/edit/',
