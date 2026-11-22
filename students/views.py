@@ -425,6 +425,39 @@ def lo_po_create(request):
         {'form': form}
     )
 
+def lo_po_edit(request, pk):
+    mapping = get_object_or_404(LearningOutcomeProgramOutcome, pk=pk)
+
+    if request.method == 'POST':
+        form = LearningOutcomeProgramOutcomeForm(
+            request.POST, instance=mapping
+        )
+        if form.is_valid():
+            form.save()
+            return redirect('lo_po_list')
+    else:
+        form = LearningOutcomeProgramOutcomeForm(instance=mapping)
+
+    return render(
+        request,
+        'students/lo_po_form.html',
+        {'form': form}
+    )
+
+
+def lo_po_delete(request, pk):
+    mapping = get_object_or_404(LearningOutcomeProgramOutcome, pk=pk)
+
+    if request.method == 'POST':
+        mapping.delete()
+        return redirect('lo_po_list')
+
+    return render(
+        request,
+        'students/lo_po_confirm_delete.html',
+        {'mapping': mapping}
+    )
+
 def performance_results(request):
     enrollments = Enrollment.objects.select_related(
         'student',

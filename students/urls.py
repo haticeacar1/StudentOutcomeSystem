@@ -81,6 +81,8 @@ path(
 
     path('lo-po/', views.lo_po_list, name='lo_po_list'),
     path('lo-po/add/', views.lo_po_create, name='lo_po_create'),
+    path('lo-po/<int:pk>/edit/', views.lo_po_edit, name='lo_po_edit'),
+path('lo-po/<int:pk>/delete/', views.lo_po_delete, name='lo_po_delete'),
 
     path(
         'performance-results/',

@@ -11,6 +11,7 @@
             <th>Learning Outcome</th>
             <th>Program Outcome</th>
             <th>Weight</th>
+            <th>Actions</th>
         </tr>
     </thead>
 
@@ -20,10 +21,15 @@
             <td>{{ mapping.learning_outcome }}</td>
             <td>{{ mapping.program_outcome }}</td>
             <td>{{ mapping.weight }}</td>
+            <td>
+                <a href="{% url 'lo_po_edit' mapping.pk %}">Edit</a>
+                |
+                <a href="{% url 'lo_po_delete' mapping.pk %}">Delete</a>
+            </td>
         </tr>
         {% empty %}
         <tr>
-            <td colspan="3">No mappings found.</td>
+            <td colspan="4">No mappings found.</td>
         </tr>
         {% endfor %}
     </tbody>
